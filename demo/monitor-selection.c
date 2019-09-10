@@ -40,7 +40,7 @@ on_monitors_changed (GdkDisplay *display, GdkMonitor *_monitor, GtkComboBox *com
 }
 
 GtkWidget *
-monitor_selection_new (GtkWindow *layer_window)
+monitor_selection_new (GtkWindow *layer_window, GdkMonitor *default_monitor)
 {
     GtkWidget *vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
     {

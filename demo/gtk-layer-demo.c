@@ -1,7 +1,7 @@
 #include "gtk-layer-demo.h"
 
 static GtkLayerShellLayer default_layer = GTK_LAYER_SHELL_LAYER_TOP;
-
+static GdkMonitor *default_output = NULL;
 static gboolean default_anchors[] = {FALSE, FALSE, FALSE, FALSE};
 static int default_margins[] = {0, 0, 0, 0};
 
@@ -15,6 +15,7 @@ const char *prog_details = "See https://github.com/wmww/gtk-layer-shell for more
 const char *anchor_edges_key = "anchor_edges";
 
 gboolean layer_option_callback (const gchar *option_name, const gchar *value, void *data, GError **error);
+gboolean output_option_callback (const gchar *option_name, const gchar *value, void *data, GError **error);
 gboolean anchor_option_callback (const gchar *option_name, const gchar *value, void *data, GError **error);
 gboolean margin_option_callback (const gchar *option_name, const gchar *value, void *data, GError **error);
 
@@ -26,6 +27,15 @@ static const GOptionEntry options[] = {
         .arg = G_OPTION_ARG_CALLBACK,
         .arg_data = (void *)&layer_option_callback,
         .description = "\"overlay\", \"top\", \"bottom\" or background (or \"o\", \"t\", \"b\" or \"g\")",
+        .arg_description = NULL,
+    },
+    {
+        .long_name = "output",
+        .short_name = 'o',
+        .flags = G_OPTION_FLAG_NONE,
+        .arg = G_OPTION_ARG_CALLBACK,
+        .arg_data = (void *)&output_option_callback,
+        .description = "[INSERT OPTION DESCRIPTION HERE]",
         .arg_description = NULL,
     },
     {
@@ -88,6 +98,20 @@ layer_option_callback (const gchar *_option_name, const gchar *value, void *_dat
                      "Invalid layer \"%s\"", value);
         return FALSE;
     }
+    return TRUE;
+}
+
+gboolean
+output_option_callback (const gchar *_option_name, const gchar *value, void *_data, GError **error)
+{
+    (void)_option_name;
+    (void)_data;
+
+    if (/*value is invalid*/)
+        return FALSE;
+
+    // Somehow set default_output
+
     return TRUE;
 }
 
